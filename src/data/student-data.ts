@@ -130,6 +130,31 @@ export const COURSES_4TH_SEM: Course[] = [
 ];
 
 // Attendance data
+const formatDate = (date: Date): string =>
+  new Intl.DateTimeFormat("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric",
+  }).format(date);
+
+const buildLectureDates = (
+  start: string,
+  end: string,
+  intervalDays: number
+): string[] => {
+  const startDate = new Date(`${start}T00:00:00`);
+  const endDate = new Date(`${end}T00:00:00`);
+  const dates: string[] = [];
+  let current = new Date(startDate);
+
+  while (current <= endDate) {
+    dates.push(formatDate(current));
+    current.setDate(current.getDate() + intervalDays);
+  }
+
+  return dates;
+};
+
 const makeRecords = (
   dates: string[],
   absentAt: number[]
@@ -141,69 +166,53 @@ const makeRecords = (
     status: absentAt.includes(idx + 1) ? "Absent" : "Present",
   }));
 
-const labDates = [
-  "20-Jan-2026","29-Jan-2026","12-Feb-2026","19-Feb-2026","26-Feb-2026",
-  "05-Mar-2026","12-Mar-2026","19-Mar-2026","26-Mar-2026","03-Apr-2026",
-  "16-Apr-2026","23-Apr-2026","30-Apr-2026",
-];
+const makeAttendanceSummary = (
+  records: AttendanceRecord[],
+  absentAt: number[]
+): Omit<CourseAttendance, "courseCode"> => {
+  const absent = records.filter((record, idx) =>
+    absentAt.includes(idx + 1) || record.status === "Absent"
+  ).length;
+  const held = records.length;
+  const attended = held - absent;
+  const percentage = Number(((attended / held) * 100).toFixed(2));
 
-const theoryDates = [
-  "20-Jan-2026","22-Jan-2026","27-Jan-2026","29-Jan-2026","03-Feb-2026",
-  "05-Feb-2026","10-Feb-2026","12-Feb-2026","17-Feb-2026","19-Feb-2026",
-  "24-Feb-2026","26-Feb-2026","03-Mar-2026","05-Mar-2026","10-Mar-2026",
-  "12-Mar-2026","17-Mar-2026","19-Mar-2026","24-Mar-2026","26-Mar-2026",
-  "02-Apr-2026","07-Apr-2026","09-Apr-2026","14-Apr-2026","16-Apr-2026",
-  "21-Apr-2026","23-Apr-2026","28-Apr-2026",
-];
+  return {
+    held,
+    attended,
+    absent,
+    percentage,
+    records,
+  };
+};
+
+const labDates = buildLectureDates("2026-01-20", "2026-05-09", 7);
+const theoryDates = buildLectureDates("2026-01-20", "2026-05-09", 4);
 
 export const ATTENDANCE_DATA: CourseAttendance[] = [
   {
     courseCode: "CL2001",
-    held: 13,
-    attended: 9,
-    absent: 4,
-    percentage: 69.23,
-    records: makeRecords(labDates, [1, 3, 4, 5]),
+    ...makeAttendanceSummary(makeRecords(labDates, [1, 3, 4, 5]), [1, 3, 4, 5]),
   },
   {
     courseCode: "CS2001",
-    held: 28,
-    attended: 24,
-    absent: 4,
-    percentage: 85.71,
-    records: makeRecords(theoryDates, [3, 9, 17, 24]),
+    ...makeAttendanceSummary(makeRecords(theoryDates, [3, 9, 17, 24]), [3, 9, 17, 24]),
   },
   {
     courseCode: "MT2005",
-    held: 28,
-    attended: 23,
-    absent: 5,
-    percentage: 82.14,
-    records: makeRecords(theoryDates, [2, 8, 14, 20, 26]),
+    ...makeAttendanceSummary(makeRecords(theoryDates, [2, 8, 14, 20, 26]), [2, 8, 14, 20, 26]),
   },
   {
     courseCode: "SE2001",
-    held: 28,
-    attended: 25,
-    absent: 3,
-    percentage: 89.29,
-    records: makeRecords(theoryDates, [5, 12, 22]),
+    ...makeAttendanceSummary(makeRecords(theoryDates, [5, 12, 22]), [5, 12, 22]),
   },
   {
     courseCode: "SE2004",
-    held: 28,
-    attended: 24,
-    absent: 4,
-    percentage: 85.71,
-    records: makeRecords(theoryDates, [4, 11, 19, 25]),
+    ...makeAttendanceSummary(makeRecords(theoryDates, [4, 11, 19, 25]), [4, 11, 19, 25]),
   },
   {
     courseCode: "SS1015",
-    held: 18,
-    attended: 16,
-    absent: 2,
-    percentage: 88.89,
-    records: makeRecords(theoryDates.slice(0, 18), [6, 13]),
+    ...makeAttendanceSummary(makeRecords(theoryDates.slice(0, 18), [6, 13]), [6, 13]),
   },
 ];
 
