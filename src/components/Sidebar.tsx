@@ -33,7 +33,7 @@ export default function Sidebar({
   ];
 
   return (
-    <aside className="no-print flex-shrink-0" style={{
+    <aside className="no-print flex-shrink-0 responsive-sidebar" style={{
       width: "200px",
       minHeight: "100vh",
       background: "#111622",
@@ -76,7 +76,7 @@ export default function Sidebar({
       </div>
 
       {/* Nav items */}
-      <nav style={{ flex: 1, paddingTop: "8px" }}>
+      <nav className="responsive-sidebar-nav" style={{ flex: 1, paddingTop: "8px" }}>
         {menuItems.map((item) => {
           const Icon = item.icon;
           const isActive = activeTab === item.id;

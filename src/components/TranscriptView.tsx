@@ -18,7 +18,7 @@ export default function TranscriptView() {
   return (
     <div style={{ fontFamily: "Inter, sans-serif" }}>
       {/* Semester + Print */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
+      <div className="responsive-action-row" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "16px" }}>
         <div style={{ position: "relative" }}>
           <select style={{
             padding: "8px 36px 8px 14px",
@@ -44,7 +44,7 @@ export default function TranscriptView() {
       <div className="print-container print-page" style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: "4px", overflow: "hidden" }}>
 
         {/* Summary header matching Image 4 */}
-        <div style={{
+        <div className="responsive-summary-bar" style={{
           background: "#f8fafc", borderBottom: "1px solid #e2e8f0",
           padding: "12px 20px",
           display: "flex", alignItems: "center", justifyContent: "space-between",
@@ -60,7 +60,8 @@ export default function TranscriptView() {
         </div>
 
         {/* Transcript table */}
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
+        <div className="responsive-table-wrap">
+          <table className="responsive-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
           <thead>
             <tr style={{ background: "#0093DD", color: "#fff" }}>
               {["Course Code","Course Name","Section","CrdHrs","Grade","Points","Type","Remarks"].map(h => (
@@ -86,7 +87,8 @@ export default function TranscriptView() {
               </tr>
             ))}
           </tbody>
-        </table>
+          </table>
+        </div>
 
         {/* Scroll to top */}
         <div className="no-print" style={{ display: "flex", justifyContent: "flex-end", padding: "12px 20px" }}>

@@ -56,10 +56,10 @@ export default function Page() {
   /* ─── LOGIN PAGE ─── */
   if (!isLoggedIn) {
     return (
-      <div style={{ display: "flex", minHeight: "100vh", fontFamily: "Inter, sans-serif" }}>
+      <div className="responsive-login-shell" style={{ display: "flex", minHeight: "100vh", fontFamily: "Inter, sans-serif" }}>
 
         {/* LEFT – white login panel */}
-        <div style={{
+        <div className="responsive-login-panel" style={{
           width: "50%", background: "#fff",
           display: "flex", flexDirection: "column",
           alignItems: "center", justifyContent: "center",
@@ -204,7 +204,7 @@ export default function Page() {
         </div>
 
         {/* RIGHT – bookshelf welcome panel */}
-        <div style={{
+        <div className="responsive-login-hero" style={{
           width: "50%",
           background: `linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)),
             url('https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=900&q=80') center/cover no-repeat`,
@@ -242,7 +242,7 @@ export default function Page() {
   };
 
   return (
-    <div style={{ display: "flex", minHeight: "100vh", background: "#f0f2f5", fontFamily: "Inter, sans-serif" }}>
+    <div className="responsive-portal-shell" style={{ display: "flex", minHeight: "100vh", background: "#f0f2f5", fontFamily: "Inter, sans-serif" }}>
 
       <Sidebar
         activeTab={activeTab}
@@ -252,10 +252,10 @@ export default function Page() {
         setDarkMode={() => {}}
       />
 
-      <div style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: "100vh", overflowX: "hidden" }}>
+      <div className="responsive-portal-content" style={{ flex: 1, display: "flex", flexDirection: "column", minHeight: "100vh", overflowX: "hidden" }}>
 
         {/* Top Nav Bar */}
-        <header className="no-print" style={{
+        <header className="no-print responsive-portal-header" style={{
           height: "56px", background: "#1a365d",
           display: "flex", alignItems: "center",
           justifyContent: "space-between", padding: "0 24px",
@@ -264,7 +264,7 @@ export default function Page() {
           <h2 style={{ color: "#fff", fontSize: "14px", fontWeight: "700", textTransform: "uppercase", letterSpacing: "0.5px", margin: 0 }}>
             {tabTitle[activeTab] ?? ""}
           </h2>
-          <div style={{ display: "flex", alignItems: "center", gap: "16px" }}>
+          <div className="responsive-header-user" style={{ display: "flex", alignItems: "center", gap: "16px" }}>
             <button onClick={() => toast("No new notifications.")}
               style={{ background: "none", border: "none", cursor: "pointer", color: "#94a3b8" }}>
               <Bell size={16} />
@@ -287,7 +287,7 @@ export default function Page() {
         </header>
 
         {/* Page content */}
-        <main style={{ flex: 1, padding: "24px 28px" }}>
+        <main className="responsive-portal-main" style={{ flex: 1, padding: "24px 28px" }}>
           {activeTab === "dashboard"  && <DashboardView />}
           {activeTab === "attendance" && <AttendanceView />}
           {activeTab === "marks"      && <MarksView />}

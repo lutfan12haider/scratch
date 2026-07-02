@@ -14,7 +14,7 @@ export default function MarksView() {
   return (
     <div style={{ fontFamily: "Inter, sans-serif" }}>
       {/* Semester selector */}
-      <div style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
+      <div className="responsive-action-row" style={{ display: "flex", justifyContent: "center", marginBottom: "16px" }}>
         <div style={{ position: "relative" }}>
           <select style={{
             padding: "8px 36px 8px 14px",
@@ -32,7 +32,7 @@ export default function MarksView() {
       <div style={{ background: "#fff", border: "1px solid #e2e8f0", borderRadius: "4px", overflow: "hidden" }}>
 
         {/* Header with course tabs */}
-        <div style={{
+        <div className="responsive-topbar" style={{
           background: "#1a365d", padding: "10px 16px",
           display: "flex", alignItems: "center", justifyContent: "space-between",
           flexWrap: "wrap", gap: "8px",
@@ -40,7 +40,7 @@ export default function MarksView() {
           <span style={{ color: "#fff", fontWeight: "700", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
             Student Marks
           </span>
-          <div style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
+          <div className="responsive-course-tabs" style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
             {COURSES_4TH_SEM.map(c => (
               <button key={c.code} onClick={() => setSelectedCode(c.code)}
                 style={{
@@ -68,7 +68,8 @@ export default function MarksView() {
           </p>
 
           {/* Marks table */}
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
+          <div className="responsive-table-wrap">
+            <table className="responsive-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
             <thead>
               <tr style={{ background: "#0093DD", color: "#fff" }}>
                 {["Component","Total Marks","Obtained Marks","Class Average","Minimum","Maximum"].map(h => (
@@ -111,7 +112,8 @@ export default function MarksView() {
                 <td colSpan={3} />
               </tr>
             </tbody>
-          </table>
+            </table>
+          </div>
         </div>
       </div>
     </div>

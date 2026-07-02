@@ -24,7 +24,7 @@ export default function AttendanceView() {
           <span style={{ color: "#fff", fontWeight: "700", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
             Registered Courses
           </span>
-          <div style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
+          <div className="responsive-course-tabs" style={{ display: "flex", gap: "4px", flexWrap: "wrap" }}>
             {COURSES_4TH_SEM.map(c => (
               <button key={c.code} onClick={() => setSelectedCode(c.code)}
                 style={{
@@ -43,7 +43,7 @@ export default function AttendanceView() {
         </div>
 
         {/* Course title + percentage bar */}
-        <div style={{
+        <div className="responsive-summary-bar" style={{
           padding: "14px 20px",
           display: "flex", alignItems: "center", justifyContent: "space-between",
           borderBottom: "1px solid #e2e8f0", flexWrap: "wrap", gap: "12px",
@@ -70,7 +70,8 @@ export default function AttendanceView() {
 
         {/* Attendance detail table matching screenshot exactly */}
         <div style={{ padding: "16px 20px" }}>
-          <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
+          <div className="responsive-table-wrap">
+            <table className="responsive-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
             <thead>
               <tr style={{ background: "#0093DD", color: "#fff" }}>
                 {["Lecture No","Date","Duration (In Hours)","Presence"].map(h => (
@@ -104,7 +105,8 @@ export default function AttendanceView() {
                 </tr>
               ))}
             </tbody>
-          </table>
+            </table>
+          </div>
         </div>
       </div>
     </div>

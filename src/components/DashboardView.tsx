@@ -36,7 +36,7 @@ export default function DashboardView() {
       </div>
 
       {/* Stats cards */}
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "14px" }}>
+      <div className="responsive-stats-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "14px" }}>
         {[
           { label: "CGPA", value: STUDENT_PROFILE.cgpa, color: "#1a365d" },
           { label: "SGPA", value: STUDENT_PROFILE.sgpa, color: "#1a365d" },
@@ -62,7 +62,8 @@ export default function DashboardView() {
         <div style={{ background: "#1a365d", padding: "10px 16px", color: "#fff", fontWeight: "700", fontSize: "12px", textTransform: "uppercase", letterSpacing: "0.5px" }}>
           Registered Courses — Spring 2026
         </div>
-        <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
+        <div className="responsive-table-wrap">
+          <table className="responsive-table" style={{ width: "100%", borderCollapse: "collapse", fontSize: "13px" }}>
           <thead>
             <tr style={{ background: "#0093DD", color: "#fff" }}>
               {["Course Code","Course Title","Section","Cr. Hrs","Attendance","Type"].map(h => (
@@ -98,7 +99,8 @@ export default function DashboardView() {
               );
             })}
           </tbody>
-        </table>
+          </table>
+        </div>
       </div>
     </div>
   );
