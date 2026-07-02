@@ -59,9 +59,9 @@ export default function AttendanceView() {
               fontWeight: "700", fontSize: "12px",
             }}>{pct.toFixed(2)}%</span>
             {/* Striped progress bar */}
-            <div style={{ width: "120px", height: "16px", background: "#e5e7eb", borderRadius: "2px", overflow: "hidden" }}>
+            <div style={{ width: "120px", height: "16px", backgroundColor: "#e5e7eb", borderRadius: "2px", overflow: "hidden" }}>
               <div style={{
-                width: `${pct}%`, height: "100%", background: barColor,
+                width: `${pct}%`, height: "100%", backgroundColor: barColor,
                 backgroundImage: "repeating-linear-gradient(45deg, transparent, transparent 4px, rgba(255,255,255,0.2) 4px, rgba(255,255,255,0.2) 8px)",
               }} />
             </div>
